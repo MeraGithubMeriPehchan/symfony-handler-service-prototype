@@ -7,7 +7,10 @@ class OrderFactory
 {
     public function create(string $customerName, float $amount): Order
     {
-        return new Order($customerName, number_format($amount, 2, '.', ''));
-        
+        $order = new Order();
+        $order->setCustomerName($customerName);
+        $order->setAmount(number_format($amount, 2, '.', ''));
+        $order->setCreatedAt(new \DateTimeImmutable());
+        return $order;
     }
 }
