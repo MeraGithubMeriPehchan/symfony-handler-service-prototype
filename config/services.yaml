@@ -27,6 +27,7 @@ services:
         tags: ['controller.service_arguments']
 
     App\EventSubscriber\OrderSubscriber:
+        public: true
         tags:
             - { name: doctrine.event_subscriber }
 

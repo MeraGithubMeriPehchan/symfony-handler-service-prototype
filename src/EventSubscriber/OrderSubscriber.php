@@ -11,7 +11,9 @@ use Psr\Log\LoggerInterface;
 
 class OrderSubscriber implements EventSubscriber
 {
-    public function __construct(private LoggerInterface $logger) {}
+    public function __construct(private LoggerInterface $logger) {
+        $this->logger->warning("OrderSubscriber instantiated");
+    }
 
     public function getSubscribedEvents(): array
     {
@@ -21,21 +23,21 @@ class OrderSubscriber implements EventSubscriber
     public function postPersist(PostPersistEventArgs $args): void
     {
         if ($args->getObject() instanceof Order) {
-            $this->logger->info("Doctrine Trigger: Order created.");
+            $this->logger->warning("Doctrine Trigger: Order created.");
         }
     }
 
     public function postUpdate(PostUpdateEventArgs $args): void
     {
         if ($args->getObject() instanceof Order) {
-            $this->logger->info("Doctrine Trigger: Order updated.");
+            $this->logger->warning("Doctrine Trigger: Order updated.");
         }
     }
 
     public function preRemove(PreRemoveEventArgs $args): void
     {
         if ($args->getObject() instanceof Order) {
-            $this->logger->info("Doctrine Trigger: Order deleted.");
+            $this->logger->warning("Doctrine Trigger: Order deleted.");
         }
     }
 }
